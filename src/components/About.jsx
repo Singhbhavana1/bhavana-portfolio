@@ -1,4 +1,7 @@
 import React from "react";
+import { bio } from "../constants";
+import styled, { useTheme } from "styled-components";
+
 import { Tilt } from "react-tilt";
 import { motion } from "framer-motion";
 import { styles } from "../styles";
@@ -28,6 +31,36 @@ const ServiceCard = ({ index, title, icon }) => {
 };
 
 const About = () => {
+  const ButtonContainer = styled.div`
+    // width: 40%;
+    height: 100%;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    padding: 12px 6px;
+    @media screen and (max-width: 768px) {
+      display: none;
+    }
+  `;
+  const GithubButton = styled.a`
+    border: 2px solid #dfd9ff;
+    color: #dfd9ff;
+    background: linear-gradient(to left, #2d3a49, #412f47);
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    border-radius: 20px;
+    cursor: pointer;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: 500;
+    transition: all 0.6s ease-in-out;
+    text-decoration: none;
+    &:hover {
+      background: white;
+      color: #4c00b0;
+    }
+  `;
   return (
     <>
       <motion.div variants={textVariant()}>
@@ -49,6 +82,11 @@ const About = () => {
         you share a passion for web development or have exciting opportunities
         to discuss!
       </motion.p>
+      <ButtonContainer>
+        <GithubButton href={bio.github} target="_Blank">
+          Check Resume
+        </GithubButton>
+      </ButtonContainer>
 
       <div className="mt-20 flex flex-wrap gap-10">
         {services.map((service, index) => (

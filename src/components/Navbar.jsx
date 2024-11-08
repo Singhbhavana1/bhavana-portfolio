@@ -1,15 +1,46 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-
+import styled, { useTheme } from "styled-components";
 import { styles } from "../styles";
 import { navLinks } from "../constants";
-import { logo, menu, close, bslogos } from "../assets";
+import { menu, close, bslogos } from "../assets";
+import { bio } from "../constants";
 
 const Navbar = () => {
   const [active, setActive] = useState("");
   const [toggle, setToggle] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
+  const ButtonContainer = styled.div`
+    width: 20%;
+    height: 100%;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    padding: 0 6px;
+    @media screen and (max-width: 768px) {
+      display: none;
+    }
+  `;
+  const GithubButton = styled.a`
+    border: 2px solid #dfd9ff;
+    color: #dfd9ff;
+    background: linear-gradient(to left, #2d3a49, #412f47);
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    border-radius: 20px;
+    cursor: pointer;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: 500;
+    transition: all 0.6s ease-in-out;
+    text-decoration: none;
+    &:hover {
+      background: white;
+      color: #4c00b0;
+    }
+  `;
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop = window.scrollY;
@@ -62,6 +93,12 @@ const Navbar = () => {
             </li>
           ))}
         </ul>
+        {/* <button>Github Profile</button> */}
+        <ButtonContainer>
+          <GithubButton href={bio.github} target="_Blank">
+            Github Profile
+          </GithubButton>
+        </ButtonContainer>
 
         <div className="sm:hidden flex flex-1 justify-end items-center">
           <img
@@ -74,7 +111,7 @@ const Navbar = () => {
           <div
             className={`${
               !toggle ? "hidden" : "flex"
-            } p-6 black-gradient absolute top-20 right-0 mx-4 my-2 min-w-[140px] z-10 rounded-xl`}
+            } p-6 black-gradient absolute flex-col top-20 right-0 mx-4 my-2 min-w-[140px] z-10 rounded-xl`}
           >
             <ul className="list-none flex justify-end items-start flex-1 flex-col gap-4">
               {navLinks.map((nav) => (
@@ -92,6 +129,7 @@ const Navbar = () => {
                 </li>
               ))}
             </ul>
+            <button>Github Profile</button>
           </div>
         </div>
       </div>
