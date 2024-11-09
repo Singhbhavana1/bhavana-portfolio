@@ -22,25 +22,46 @@ import redux from "./tech/redux.png";
 import tailwind from "./tech/tailwind.png";
 import typescript from "./tech/typescript.png";
 import threejs from "./tech/threejs.svg";
-
 import meta from "./company/meta.png";
 import shopify from "./company/shopify.png";
 import starbucks from "./company/starbucks.png";
 import tesla from "./company/tesla.png";
-
 import carrent from "./carrent.png";
-import jobit from "./jobit.png";
-import tripguide from "./tripguide.png";
+
+import weatherjs from "./weather-js.png";
+import rockpaperjs from "./rock-paper-js.png";
+import digitalclockjs from "./digital-clock-js.png";
+import diceRollerjs from "./dice-roller-js.png";
+import multiplicationJs from "./multiplication-js.png";
+import calenderJs from "./calendar-js.png";
+import bmiCalculator from "./bmi-calculator.png";
+import todoJs from "./todo-js.png";
+import temperatureConversion from "./temperature-conversion-js.png";
+import stopWatch from "./stop-watch-js.png";
+import randomJoke from "./random-joke-js.png";
+import darkmodeJs from "./darkmood-js.png";
 
 export {
+  darkmodeJs,
+  weatherjs,
+  diceRollerjs,
+  multiplicationJs,
+  bmiCalculator,
+  todoJs,
+  temperatureConversion,
+  stopWatch,
   logo,
   backend,
   creator,
+  rockpaperjs,
+  digitalclockjs,
   mobile,
   web,
   github,
   menu,
   close,
+  calenderJs,
+  randomJoke,
   bslogo,
   css,
   docker,
@@ -60,7 +81,5 @@ export {
   starbucks,
   tesla,
   carrent,
-  jobit,
-  tripguide,
   bslogos,
 };

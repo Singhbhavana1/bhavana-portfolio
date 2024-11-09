@@ -9,6 +9,54 @@ import { services } from "../constants";
 import { fadeIn, textVariant } from "../utils/motion";
 import { SectionWrap } from "../hoc";
 
+const ResumeButton = styled.a`
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+
+  width: 95%;
+  max-width: 150px;
+  text-align: center;
+  padding: 16px 0;
+
+  background: hsla(271, 100%, 50%, 1);
+  background: linear-gradient(
+    225deg,
+    hsla(271, 100%, 50%, 1) 0%,
+    hsla(294, 100%, 50%, 1) 100%
+  );
+  background: -moz-linear-gradient(
+    225deg,
+    hsla(271, 100%, 50%, 1) 0%,
+    hsla(294, 100%, 50%, 1) 100%
+  );
+  background: -webkit-linear-gradient(
+    225deg,
+    hsla(271, 100%, 50%, 1) 0%,
+    hsla(294, 100%, 50%, 1) 100%
+  );
+  box-shadow: 20px 20px 60px #1f2634, -20px -20px 60px #1f2634;
+  border-radius: 50px;
+  font-weight: 600;
+  margin-top:15px;
+  font-size: 15px;
+
+     &:hover {
+        transform: scale(1.05);
+    transition: all 0.4s ease-in-out;
+    box-shadow:  20px 20px 60px #1F2634,
+    filter: brightness(1);
+    }    
+    
+    
+    @media (max-width: 640px) {
+        padding: 12px 0;
+        font-size: 18px;
+    } 
+    color: white;
+`;
+
 const ServiceCard = ({ index, title, icon }) => {
   return (
     <Tilt className="xs:w-[250px] w-full ">
@@ -31,36 +79,6 @@ const ServiceCard = ({ index, title, icon }) => {
 };
 
 const About = () => {
-  const ButtonContainer = styled.div`
-    // width: 40%;
-    height: 100%;
-    display: flex;
-    justify-content: start;
-    align-items: center;
-    padding: 12px 6px;
-    @media screen and (max-width: 768px) {
-      display: none;
-    }
-  `;
-  const GithubButton = styled.a`
-    border: 2px solid #dfd9ff;
-    color: #dfd9ff;
-    background: linear-gradient(to left, #2d3a49, #412f47);
-    justify-content: center;
-    display: flex;
-    align-items: center;
-    border-radius: 20px;
-    cursor: pointer;
-    padding: 10px 20px;
-    font-size: 16px;
-    font-weight: 500;
-    transition: all 0.6s ease-in-out;
-    text-decoration: none;
-    &:hover {
-      background: white;
-      color: #4c00b0;
-    }
-  `;
   return (
     <>
       <motion.div variants={textVariant()}>
@@ -82,11 +100,9 @@ const About = () => {
         you share a passion for web development or have exciting opportunities
         to discuss!
       </motion.p>
-      <ButtonContainer>
-        <GithubButton href={bio.github} target="_Blank">
-          Check Resume
-        </GithubButton>
-      </ButtonContainer>
+      <ResumeButton href={bio.resume} target="_blank">
+        Check Resume
+      </ResumeButton>
 
       <div className="mt-20 flex flex-wrap gap-10">
         {services.map((service, index) => (

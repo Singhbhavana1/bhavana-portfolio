@@ -1,72 +1,116 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Tilt } from "react-tilt";
+import ProjectCard from "./cards/ProjectCard";
+// import { Tilt } from "react-tilt";
+import styled from "styled-components";
 import { styles } from "../styles";
-import { github } from "../assets";
+// import { github } from "../assets";
 import { SectionWrap } from "../hoc";
 import { projects } from "../constants";
 import { fadeIn, textVariant } from "../utils/motion";
 
-const ProjectCard = ({
-  index,
-  name,
-  description,
-  tags,
-  image,
-  source_code_link,
-}) => {
-  return (
-    <motion.div variants={fadeIn("up", "spring", index * 0.5, 0.75)}>
-      <Tilt
-        options={{
-          max: 45,
-          scale: 1,
-          speed: 450,
-        }}
-        className="bg-tertiary p-5 rounded-2xl sm:w-[360px] w-full"
-      >
-        <div className="relative w-full h-[230px]">
-          <img
-            src={image}
-            alt="project_image"
-            className="w-full h-full object-cover rounded-2xl"
-          />
+const CardContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 28px;
+  flex-wrap: wrap;
+`;
 
-          <div className="absolute inset-0 flex justify-end m-3 card-img_hover">
-            <div
-              onClick={() => window.open(source_code_link, "_blank")}
-              className="black-gradient w-10 h-10 rounded-full flex justify-center items-center cursor-pointer"
-            >
-              <img
-                src={github}
-                alt="source code"
-                className="w-1/2 h-1/2 object-contain"
-              />
-            </div>
-          </div>
-        </div>
+const ToggleButtonGroup = styled.div`
+  display: flex;
+  border: 1.5px solid ${({ theme }) => theme.primary};
+  color: ${({ theme }) => theme.primary};
+  font-size: 16px;
+  border-radius: 12px;
+font-weight 500;
+margin: 22px 0;
+@media (max-width: 768px){
+    font-size: 12px;
+}
+`;
+const ToggleButton = styled.div`
+  padding: 8px 18px;
+  border-radius: 6px;
+  cursor: pointer;
+  &:hover {
+    background: ${({ theme }) => theme.primary + 20};
+  }
+  @media (max-width: 768px) {
+    padding: 6px 8px;
+    border-radius: 4px;
+  }
+  ${({ active, theme }) =>
+    active &&
+    `
+  background:  ${theme.primary + 20};
+  `}
+`;
+const Divider = styled.div`
+  width: 1.5px;
+  background: ${({ theme }) => theme.primary};
+`;
+// const ProjectCard = ({
+//   index,
+//   name,
+//   description,
+//   tags,
+//   image,
+//   source_code_link,
+// }) => {
+//   return (
+//     <motion.div variants={fadeIn("up", "spring", index * 0.5, 0.75)}>
+//       <Tilt
+//         options={{
+//           max: 45,
+//           scale: 1,
+//           speed: 450,
+//         }}
+//         className="bg-tertiary p-5 rounded-2xl sm:w-[360px] w-full"
+//       >
+//         <div className="relative w-full h-[230px]">
+//           <img
+//             src={image}
+//             alt="project_image"
+//             className="w-full h-full object-cover rounded-2xl"
+//           />
 
-        <div className="mt-5">
-          <h3 className="text-white font-bold text-[24px]">{name}</h3>
-          <p className="mt-2 text-secondary text-[14px]">{description}</p>
-        </div>
+//           <div className="absolute inset-0 flex justify-end m-3 card-img_hover">
+//             <div
+//               onClick={() => window.open(source_code_link, "_blank")}
+//               className="black-gradient w-10 h-10 rounded-full flex justify-center items-center cursor-pointer"
+//             >
+//               <img
+//                 src={github}
+//                 alt="source code"
+//                 className="w-1/2 h-1/2 object-contain"
+//               />
+//             </div>
+//           </div>
+//         </div>
 
-        <div className="mt-4 flex flex-wrap gap-2">
-          {tags.map((tag) => (
-            <p
-              key={`${name}-${tag.name}`}
-              className={`text-[14px] ${tag.color}`}
-            >
-              #{tag.name}
-            </p>
-          ))}
-        </div>
-      </Tilt>
-    </motion.div>
-  );
-};
+//         <div className="mt-5">
+//           <h3 className="text-white font-bold text-[24px]">{name}</h3>
+//           <p className="mt-2 text-secondary text-[14px]">{description}</p>
+//         </div>
+
+//         <div className="mt-4 flex flex-wrap gap-2">
+//           {tags.map((tag) => (
+//             <p
+//               key={`${name}-${tag.name}`}
+//               className={`text-[14px] ${tag.color}`}
+//             >
+//               #{tag.name}
+//             </p>
+//           ))}
+//         </div>
+//       </Tilt>
+//     </motion.div>
+//   );
+// };
 
 const Works = () => {
+  const [toggle, setToggle] = useState("all");
   return (
     <>
       <motion.div variants={textVariant()}>
@@ -86,14 +130,57 @@ const Works = () => {
           and manage projects effectively.
         </motion.p>
       </div>
-
-      <div className="mt-20 flex flex-wrap gap-7">
+      <ToggleButtonGroup>
+        <ToggleButton
+          active={toggle === "all"}
+          onClick={() => setToggle("all")}
+        >
+          ALL
+        </ToggleButton>
+        <Divider />
+        <ToggleButton
+          active={toggle === "javascript"}
+          onClick={() => setToggle("javasript")}
+        >
+          Javascript
+        </ToggleButton>
+        <Divider />
+        <ToggleButton
+          active={toggle === "android app"}
+          onClick={() => setToggle("android app")}
+        >
+          Angular/Mean
+        </ToggleButton>
+        <Divider />
+        <ToggleButton
+          active={toggle === "machine learning"}
+          onClick={() => setToggle("machine learning")}
+        >
+          React/Mern
+        </ToggleButton>
+      </ToggleButtonGroup>
+      {/* <div className="mt-20 flex flex-wrap gap-7">
         {projects.map((project, index) => (
           <ProjectCard key={`project-${index}`} index={index} {...project} />
         ))}
-      </div>
+      </div> */}
+      <CardContainer>
+        {projects.filter(
+          (project) => toggle === "all" || project.category === toggle
+        ).length > 0 ? (
+          projects
+            .filter(
+              (project) => toggle === "all" || project.category === toggle
+            )
+            .map((project, index) => (
+              <ProjectCard key={`project-${index}`} project={project} />
+            ))
+        ) : (
+          <p>Adding Soon</p>
+        )}
+      </CardContainer>
     </>
   );
 };
 
-export default SectionWrap(Works, "");
+export default SectionWrap(Works, "projects");

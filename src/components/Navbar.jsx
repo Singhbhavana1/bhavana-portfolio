@@ -129,7 +129,11 @@ const Navbar = () => {
                 </li>
               ))}
             </ul>
-            <button>Github Profile</button>
+            <ButtonContainer>
+              <GithubButton href={bio.github} target="_Blank">
+                Github Profile
+              </GithubButton>
+            </ButtonContainer>
           </div>
         </div>
       </div>
